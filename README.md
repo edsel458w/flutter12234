@@ -1,4 +1,4 @@
-# remedial_assessment
+# latihan
 
 A Flutter mobile and web application project (Toko Gadget & Google Maps).
 
