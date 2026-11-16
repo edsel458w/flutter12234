@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+import 'package:remedial_assessment/headphone.dart';
+import 'package:remedial_assessment/smartphone.dart';
+import 'package:remedial_assessment/smartwatch.dart';
+import 'package:remedial_assessment/halaman_peta.dart';
+
+class HomePage extends StatefulWidget{
+  const HomePage({super.key});
+
+  @override
+  State <HomePage> createState() => _HomePageState();
+
+
+}
+
+class _HomePageState extends State <HomePage>{
+  int currentIndex = 0;
+
+  final List<Widget>pages = const [
+    HomeContent(),
+    PetaPage(),
+    SmartphonePage(),
+    Headphone(),
+    SmartwatchPage(),
+  ];
+
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(title: Text('Toko Gadget'),
+      ),
+      body: pages[currentIndex],
+      bottomNavigationBar: NavigationBar(selectedIndex: currentIndex,onDestinationSelected: (index) {
+        setState(() {
+          currentIndex = index;
+        });
+      },
+      destinations: const [
+        NavigationDestination(
+          icon: Icon(Icons.home),
+          label: 'home',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.map), 
+          label: 'peta',
+          ),
+        NavigationDestination(
+          icon: Icon(Icons.smartphone), 
+          label: 'HP',
+          ),
+        NavigationDestination(
+          icon: Icon(Icons.headphones), 
+          label: 'Headphone',
+          ),
+        NavigationDestination(
+          icon: Icon(Icons.watch), 
+          label: 'smartwatch',
+          ),
+      ],
+      ),
+      );
+  }
+} 
+
+class HomeContent extends StatelessWidget{
+  const HomeContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child:Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.smartphone, size: 10, color: Colors.blue),
+                SizedBox(width: 10),
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Iphone Duo', style: TextStyle(fontSize: 15)),
+                    Text('Pre-order sekarang', style: TextStyle(fontSize: 10)),
+                    ElevatedButton(
+                      child: const Text('Lihat detailnya'),
+                      onPressed: () { 
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => const SmartphonePage(),
+                        ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                ),
+              ],
+            ),
+          ),
+            Container(
+              padding: EdgeInsets.all(20),
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.watch,size: 10, color: Colors.blue),
+                  SizedBox(width: 10),
+                  Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Apple Watch', style: TextStyle(fontSize: 15)),
+                    Text('Harga : 2.599.000', style: TextStyle(fontSize: 10)),
+                    ElevatedButton(
+                      child: const Text('Lihat Detail'),
+                      onPressed: () { 
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => const SmartwatchPage(),
+                        ),
+                        ); 
+                      },
+                    )
+                  ],
+                  ),
+                  ),
+                ],
+              ),
+            ),
+        Container(
+          padding: EdgeInsets.all(20),
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(border: Border.all(color:Colors.black),
+          borderRadius: BorderRadius.circular(10)),
+          child: Row(children: [Icon(Icons.headphones, size: 10, color: Colors.blue), 
+          SizedBox(width: 10),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Headphone', style: TextStyle(fontSize: 15)),
+            Text('Harga : 2.599.000', style: TextStyle(fontSize: 10)),
+            ElevatedButton(child: const Text('Lihat Detail'), onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Headphone(),),);
+            },),
+          ],
+          ), 
+          ),
+          ],
+          ),
+        ),
+         ElevatedButton(child: const Text('Buka Lokasi Toko'), onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const PetaPage(),
+           ),
+                );
+              },
+            ),
+          ],
+        ),
+    );
+  }
+}
+        
+     
